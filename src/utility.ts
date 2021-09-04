@@ -1,4 +1,4 @@
-import { ObjectOfAnything } from "./utility-types";
+import { ObjectOfAnything } from "./types/utility-types";
 
 interface forEachAsyncArgs<A, B> {
     callback(item: A, index?: number, array?: A[])

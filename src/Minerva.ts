@@ -1,4 +1,4 @@
-import {ConnectionConfig, MinervaConfig} from "./interfaces/IMinervaConfig";
+import {ConnectionConfig, MinervaConfig} from "./types/IMinervaConfig";
 import { Knex, knex } from 'knex';
 import { objKeysToCamelCase } from "./utility";
 
@@ -19,9 +19,6 @@ export class Minerva<ConnectionNames=any>{
         return this;
     }
     
-    /** Setup the DB connection pool. Wraps the mysql createPool method.
-     * @see https://www.npmjs.com/package/mysql#pooling-connections 
-    */
     private createConnection(connectionConfig :ConnectionConfig<ConnectionNames>) :this{
         this.log("info", `Setting up pool for ${connectionConfig.host}:${connectionConfig.port || 3306}...`);
         const connection = knex({
