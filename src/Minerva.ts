@@ -3,10 +3,6 @@ import { Knex, knex } from 'knex';
 import { objKeysToCamelCase } from "./utility";
 
 export class Minerva<ConnectionNames=any>{
-    /**
-     * Connections are stored by either the nickname you give them
-     * or the DB name itself from the Minerva config
-     */
     public connections :Map<ConnectionNames, Knex> = new Map();
 
     constructor(private config :MinervaConfig<ConnectionNames>){
@@ -43,8 +39,7 @@ export class Minerva<ConnectionNames=any>{
                 max: 15
             },
             log: {
-                ...this.config.logger as any,
-                warn: ()=>{}
+                ...this.config.logger as any
             }
         });
         
