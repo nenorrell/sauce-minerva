@@ -1,0 +1,26 @@
+{
+  "name": "@royalewcheese/minerva",
+  "version": "1.0.0",
+  "description": "A simple connection layer written around Knex.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "royalewcheese",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/norrell.nick/minerva.git"
+  },
+  "keywords": [
+    "knex.js",
+    "typescript",
+    "database"
+  ],
+  "dependencies": {
+    "knex": "^0.95.11"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.2"
+  }
+}
