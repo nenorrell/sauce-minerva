@@ -1,4 +1,4 @@
-import {ConnectionConfig, MinervaConfig} from "./types/IMinervaConfig";
+import {ConnectionConfig, MinervaConfig} from "./MinervaConfig";
 import { Knex, knex } from 'knex';
 import { objKeysToCamelCase } from "./utility";
 
