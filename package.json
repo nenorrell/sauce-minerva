@@ -2,9 +2,12 @@
   "name": "@royalewcheese/minerva",
   "version": "1.0.0",
   "description": "A simple connection layer written around Knex.js",
-  "main": "index.js",
+  "main": "dist/minerva.js",
+  "types": "dist/minerva.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepare" : "npm run build"
   },
   "author": "royalewcheese",
   "license": "MIT",
@@ -23,5 +26,6 @@
   "devDependencies": {
     "@types/node": "^16.7.10",
     "typescript": "^4.4.2"
-  }
+  },
+  "files": ["dist/**/*"]
 }
