@@ -3,7 +3,7 @@ import { ObjectOfAnything } from "./types/utility-types";
 interface forEachAsyncArgs<A, B> {
     callback(item: A, index?: number, array?: A[])
 }
-const asyncForEach = async <A = any, B = any>(array: A[], callback: forEachAsyncArgs<A, B>["callback"]): Promise<B[]> => {
+export const asyncForEach = async <A = any, B = any>(array: A[], callback: forEachAsyncArgs<A, B>["callback"]): Promise<B[]> => {
     try {
         const allPromises = array.map(async (item: A, index: number, array: A[]) => callback(item, index, array));
         return await Promise.all(allPromises);
@@ -23,18 +23,21 @@ const isObject = function (obj) {
 };
 
 export const objKeysToCamelCase = async (object: ObjectOfAnything) :Promise<ObjectOfAnything> => {
-    const keys = Object.keys(object);
     const result: ObjectOfAnything = {};
-    await asyncForEach(keys, async (key) => {
-        const head = object[key];
-        const camelized = camelize(key);
-
-        if (isObject(head)) {
-            result[camelized] = await objKeysToCamelCase(head);
-        }
-        else {
-            result[camelized] = object[key];
-        }
-    });
+    
+    if(object){
+        const keys = Object.keys(object);
+        await asyncForEach(keys, async (key) => {
+            const head = object[key];
+            const camelized = camelize(key);
+    
+            if (isObject(head)) {
+                result[camelized] = await objKeysToCamelCase(head);
+            }
+            else {
+                result[camelized] = object[key];
+            }
+        });
+    }
     return result;
 }

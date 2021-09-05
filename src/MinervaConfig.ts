@@ -18,7 +18,7 @@ export interface ConnectionConfig<ConnectionNames>{
 export interface MinervaConfig<ConnectionNames=string>{
     connections: ConnectionConfig<ConnectionNames>[]
     /** converts object keys to camelCase in results when true */
-    enableCamelCase ?:boolean,
+    camelizeKeys ?:boolean,
     disableLogs ?:boolean
     logger ?:{
         debug ?:Function

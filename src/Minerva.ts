@@ -1,6 +1,6 @@
 import {ConnectionConfig, MinervaConfig} from "./MinervaConfig";
 import { Knex, knex } from 'knex';
-import { objKeysToCamelCase } from "./utility";
+import { asyncForEach, objKeysToCamelCase } from "./utility";
 
 export class Minerva<ConnectionNames=any>{
     public connections :Map<ConnectionNames, Knex> = new Map();
@@ -19,10 +19,10 @@ export class Minerva<ConnectionNames=any>{
         this.log("info", `Setting up pool for ${connectionConfig.host}:${connectionConfig.port || 3306}...`);
         const connection = knex({
             client: "mysql",
-            postProcessResponse: (result) => {
-                if(this.config.enableCamelCase){
+            postProcessResponse: async (result) => {
+                if(this.config.camelizeKeys && result){
                     if (Array.isArray(result)) {
-                        return result.map(row => objKeysToCamelCase(row));
+                        return asyncForEach(result, row => objKeysToCamelCase(row));
                       }
                     return objKeysToCamelCase(result);
                 }
