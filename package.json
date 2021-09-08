@@ -1,6 +1,6 @@
 {
-  "name": "@royalewcheese/minerva",
-  "version": "1.0.3",
+  "name": "@apollo-api/minerva",
+  "version": "1.0.0",
   "description": "A simple connection layer written around Knex.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/norrell.nick/minerva.git"
+    "url": "git+https://gitlab.com/apollo-api/minerva"
   },
   "keywords": [
     "knex.js",
