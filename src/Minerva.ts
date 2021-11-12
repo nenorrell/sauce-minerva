@@ -1,33 +1,33 @@
-import {ConnectionConfig, MinervaConfig} from "./MinervaConfig";
-import { Knex, knex } from 'knex';
-import { asyncForEach, objKeysToCamelCase } from "./utility";
+import {ConnectionConfig, MinervaConfig} from './types/MinervaConfig';
+import {Knex, knex} from 'knex';
+import {asyncForEach, objKeysToCamelCase} from './utility';
 
-export class Minerva<ConnectionNames=any>{
+export class Minerva<ConnectionNames=any> {
     public connections :Map<ConnectionNames, Knex> = new Map();
 
-    constructor(private config :MinervaConfig<ConnectionNames>){
+    constructor(private config :MinervaConfig<ConnectionNames>) {
         this.connect();
     }
 
-    private connect() :this{
-        this.log("info", "Setting up connection pools");
+    private connect() :this {
+        this.log('info', 'Setting up connection pools');
         this.config.connections.forEach(this.createConnection.bind(this));
         return this;
     }
-    
-    private createConnection(connectionConfig :ConnectionConfig<ConnectionNames>) :this{
-        this.log("info", `Setting up pool for ${connectionConfig.host}:${connectionConfig.port || 3306}...`);
+
+    private createConnection(connectionConfig :ConnectionConfig<ConnectionNames>) :this {
+        this.log('info', `Setting up pool for ${connectionConfig.host}:${connectionConfig.port || 3306}...`);
         const connection = knex({
-            client: "mysql",
+            client: 'mysql',
             postProcessResponse: async (result) => {
-                if(this.config.camelizeKeys && result){
+                if(this.config.camelizeKeys && result) {
                     if (Array.isArray(result)) {
                         return asyncForEach(result, row => objKeysToCamelCase(row));
-                      }
+                    }
                     return objKeysToCamelCase(result);
                 }
             },
-            connection:{
+            connection: {
                 host: connectionConfig.host,
                 port: connectionConfig.port || 3306,
                 user: connectionConfig.user,
@@ -42,14 +42,14 @@ export class Minerva<ConnectionNames=any>{
                 ...this.config.logger as any
             }
         });
-        
+
         this.connections.set(connectionConfig.name as any, connection);
         return this;
     }
 
-    private log(logger : "debug" | "info" | "warn" | "error", msg :any){
-        if(!this.config.disableLogs){
-            if(this.config.logger[logger]){
+    private log(logger : 'debug' | 'info' | 'warn' | 'error', msg :any) {
+        if(!this.config.disableLogs) {
+            if(this.config.logger[logger]) {
                 this.config.logger[logger](msg);
             }
             else{

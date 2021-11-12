@@ -1,5 +1,5 @@
 export interface ConnectionConfig<ConnectionNames>{
-    /** 
+    /**
      * Nickname for connection that you can reference throughout code.
      * Useful for obfuscating db name or shortening long names.
     */

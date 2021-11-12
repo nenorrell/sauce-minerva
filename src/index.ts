@@ -1,2 +1,2 @@
-export {Minerva} from "./Minerva";
-export {MinervaConfig} from "./MinervaConfig";
+export {Minerva} from './Minerva';
+export {MinervaConfig} from './types/MinervaConfig';

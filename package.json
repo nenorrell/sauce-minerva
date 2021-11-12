@@ -1,13 +1,15 @@
 {
   "name": "@apollo-api/minerva",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple connection layer written around Knex.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "prepare" : "npm run build"
+    "prepare": "npm run build",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint --fix . --ext .ts"
   },
   "author": "royalewcheese",
   "license": "MIT",
@@ -25,7 +27,13 @@
   },
   "devDependencies": {
     "@types/node": "^16.7.10",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
     "typescript": "^4.4.2"
   },
-  "files": ["dist/**/*"]
+  "files": [
+    "dist/**/*"
+  ]
 }
