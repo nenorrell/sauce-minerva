@@ -1,6 +1,6 @@
 {
   "name": "@apollo-api/minerva",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple connection layer written around Knex.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "database"
   ],
   "dependencies": {
-    "knex": "^0.95.11"
+    "knex": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.7.10",

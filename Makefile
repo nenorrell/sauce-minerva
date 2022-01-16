@@ -11,3 +11,6 @@ lint:
 
 lint-fix:
 	docker run -i --rm --name lint-fix-minerva -u "node" -v `pwd`:/usr/src/app -w /usr/src/app node:${NODE} npm run lint:fix
+
+publish:
+	npm publish --access=public
