@@ -14,10 +14,12 @@ export const asyncForEach = async <A = any, B = any>(array: A[], callback: forEa
     }
 };
 
-const camelize = (str)=>{
+export const camelize = (str :string)=>{
     str = str.replace(/[-_\s.]+(.)?/g, (_, c) => c ? c.toUpperCase() : "");
     return str.substr(0, 1).toLowerCase() + str.substr(1);
 };
+
+export const camelToSnakeCase = str => str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
 const isObject = function(obj) {
     return obj === Object(obj) && !Array.isArray(obj) && typeof obj !== "function";

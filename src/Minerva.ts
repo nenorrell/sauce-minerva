@@ -1,6 +1,6 @@
 import {ConnectionConfig, MinervaConfig} from "./types/MinervaConfig";
 import {Knex, knex} from "knex";
-import {asyncForEach, objKeysToCamelCase} from "./utility";
+import {asyncForEach, camelToSnakeCase, objKeysToCamelCase} from "./utility";
 
 export class Minerva<ConnectionNames=any> {
     public connections :Map<ConnectionNames, Knex> = new Map();
@@ -26,6 +26,12 @@ export class Minerva<ConnectionNames=any> {
                     }
                     return objKeysToCamelCase(result);
                 }
+            },
+            wrapIdentifier: (value, origImpl, queryContext)=>{
+                if(this.config.camelizeKeys) {
+                    return origImpl(camelToSnakeCase(value));
+                }
+                return value;
             },
             connection: {
                 host: connectionConfig.host,
