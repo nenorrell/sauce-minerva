@@ -1,4 +1,4 @@
-import {ObjectOfAnything} from "./types/utility-types";
+import {ObjectOfAnything} from "./@types/utility-types";
 
 // eslint-disable-next-line no-unused-vars
 interface forEachAsyncArgs<A, B> {

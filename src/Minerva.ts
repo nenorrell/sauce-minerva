@@ -1,4 +1,4 @@
-import {ConnectionConfig, MinervaConfig} from "./types/MinervaConfig";
+import {ConnectionConfig, MinervaConfig} from "./@types/MinervaConfig";
 import {Knex, knex} from "knex";
 import {asyncForEach, camelToSnakeCase, objKeysToCamelCase} from "./utility";
 
@@ -17,8 +17,9 @@ export class Minerva<ConnectionNames=any> {
 
     private createConnection(connectionConfig :ConnectionConfig<ConnectionNames>) :this {
         this.log("info", `Setting up pool for ${connectionConfig.host}:${connectionConfig.port || 3306}...`);
-        const connection = knex({
-            client: "mysql",
+
+        let config :any = {
+            client: connectionConfig.client,
             postProcessResponse: async (result) => {
                 if(this.config.camelizeKeys && result) {
                     if (Array.isArray(result)) {
@@ -38,7 +39,7 @@ export class Minerva<ConnectionNames=any> {
                 port: connectionConfig.port || 3306,
                 user: connectionConfig.user,
                 password: connectionConfig.password,
-                database: connectionConfig.database
+                database: connectionConfig.database,
             },
             pool: connectionConfig.pool || {
                 min: 0,
@@ -46,10 +47,24 @@ export class Minerva<ConnectionNames=any> {
             },
             log: {
                 ...this.config.logger as any
-            }
-        });
+            },
+        };
 
-        this.connections.set(connectionConfig.name as any, connection);
+        if(this.config.knexConfig) {
+            config = {
+                ...config,
+                ...this.config.knexConfig
+            };
+        }
+
+        if(connectionConfig.connectionOptions) {
+            config.connection = {
+                ...config.connection,
+                ...connectionConfig.connectionOptions
+            };
+        }
+
+        this.connections.set(connectionConfig.name as any, knex(config));
         return this;
     }
 
