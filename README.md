@@ -3,7 +3,7 @@ Minerva is a DB connection management layer built on top of Knex.js
 
 ## Usage 
 ```javascript 
-import { Minerva } from '@apollo-api/minerva';
+import { Minerva } from '@sauce-api/minerva';
 import { minervaConfig, ConnectionNames } from './MinervaConfig';
 
 const dbs :Minerva<ConnectionNames> = new Minerva(minervaConfig);
@@ -24,7 +24,7 @@ const anotherDB = dbs.connections.get("another-db"); // Returns a Knex.js connec
 ## Example Minerva Config
 
 ``` javascript
-import { MinervaConfig } from "@apollo-api/minerva";
+import { MinervaConfig } from "@sauce-api/minerva";
 import logger from "./logger";
 
 export type ConnectionNames = "first-db" | "another-db";
